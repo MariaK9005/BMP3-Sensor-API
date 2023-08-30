@@ -65,33 +65,7 @@ BMP3_INTF_RET_TYPE bmp3_i2c_write(uint8_t reg_addr, const uint8_t *reg_data, uin
  *  @retval != BMP3_INTF_RET_SUCCESS  -> Failure Info
  *
  */
-BMP3_INTF_RET_TYPE bmp3_spi_read(uint8_t reg_addr, uint8_t *reg_data, uint32_t len, void *intf_ptr);
 
-/*!
- *  @brief Function for writing the sensor's registers through SPI bus.
- *
- *  @param[in] reg_addr     : Register address.
- *  @param[in] reg_data     : Pointer to the data buffer whose data has to be written.
- *  @param[in] len          : No of bytes to write.
- *  @param[in] intf_ptr     : Interface pointer
- *
- *  @return Status of execution
- *  @retval = BMP3_INTF_RET_SUCCESS -> Success
- *  @retval != BMP3_INTF_RET_SUCCESS  -> Failure Info
- *
- */
-BMP3_INTF_RET_TYPE bmp3_spi_write(uint8_t reg_addr, const uint8_t *reg_data, uint32_t len, void *intf_ptr);
-
-/*!
- * @brief This function provides the delay for required time (Microsecond) as per the input provided in some of the
- * APIs.
- *
- *  @param[in] period       : The required wait time in microsecond.
- *  @param[in] intf_ptr     : Interface pointer
- *
- *  @return void.
- *
- */
 void bmp3_delay_us(uint32_t period, void *intf_ptr);
 
 /*!
@@ -105,11 +79,23 @@ void bmp3_delay_us(uint32_t period, void *intf_ptr);
 void bmp3_check_rslt(const char api_name[], int8_t rslt);
 
 /*!
- *  @brief Deinitializes coines platform
+ * \ingroup bmp3ApiDeinit
+ * \page bmp3_api_bmp3_deinit bmp3_deinit
+ * \code
+ * int8_t bmp3_deinit(struct bmp3_dev *dev);
+ * \endcode
+ * @details This API is the entry point.
+ * Performs the selection of I2C/SPI read mechanism according to the
+ * selected interface and reads the chip-id and calibration data of the sensor.
  *
- *  @return void.
+ *  @param[in,out] dev : Structure instance of bmp3_dev
+ *
+ * @return Result of API execution status
+ * @retval 0  -> Success
+ * @retval >0 -> Warning
+ * @retval <0 -> Error
  */
-void bmp3_coines_deinit(void);
+void bmp3_deinit(struct bmp3_dev *dev);
 
 #ifdef __cplusplus
 }
