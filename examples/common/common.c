@@ -126,3 +126,11 @@ void bmp3_deinit(struct bmp3_dev *dev) {
     dev->chip_id = 0;
     dev->dummy_byte = 0;
 }
+
+struct bmp3_dev *bmp3_get_dev_singleton() {
+    static struct bmp3_dev bmp3_dev_singleton;
+    if (bmp3_dev_singleton.intf_ptr == 0) {
+        bmp3_interface_init(&bmp3_dev_singleton, BMP3_I2C_INTF);
+    }
+    return &bmp3_dev_singleton;
+}

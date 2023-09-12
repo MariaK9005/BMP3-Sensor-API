@@ -97,6 +97,8 @@ void bmp3_check_rslt(const char api_name[], int8_t rslt);
  */
 void bmp3_deinit(struct bmp3_dev *dev);
 
+struct bmp3_dev *get_bmp3_dev_singleton();
+
 #ifdef __cplusplus
 }
 #endif /*__cplusplus */
